@@ -1,0 +1,107 @@
+.modal-backdrop {
+    backdrop-filter: blur(5px);
+    opacity: 0.8 !important;
+}
+.modal-content {
+    border-radius: 15px;
+}
+.feed-item {
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    border-radius: 12px;
+    width: 100%;
+    height: 400px; /* Instagram-style image size */
+}
+.nav-pills .nav-link {
+    padding: 12px 18px;
+    border-radius: 10px;
+    background: #f0f0f0;
+    margin: 0 4px;
+    transition: all 0.3s;
+}
+.nav-pills .nav-link.active {
+    background-color: #007bff;
+    color: white;
+}
+.bi {
+    font-size: 1.5em;
+}
+.card {
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.08);
+    margin: 1rem 0;
+    width: 80%; /* Make cards narrower */
+    max-width: 500px;
+}
+.card-header {
+    background: transparent;
+    border-bottom: none;
+    padding: 1rem;
+}
+.card-body {
+    padding: 1rem;
+}
+.card-footer {
+    background: transparent;
+    border-top: none;
+    padding: 1rem;
+}
+#grid-feed {
+    padding: 0 1rem;
+}
+#grid-feed .col {
+    padding: 0.5rem;
+}
+
+/* Add ample padding to the container */
+.container {
+    padding: 0 2rem;
+    max-width: 800px; /* Limit container width */
+}
+
+/* Center the nav-pills */
+.nav.nav-pills {
+    justify-content: center;
+}
+
+/* Center cards in vertical view */
+.list-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.feed-item {
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    border-radius: 12px;
+    width: 250px; /* Square size */
+    height: 250px;
+    transition: filter 0.3s ease;
+    margin: 8px; /* Add margin between images */
+    background-color: white;
+}
+
+.feed-item:hover {
+    filter: brightness(1.1) saturate(1.3); /* Increase brightness and saturation */
+}
+
+.feed-item {
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    border-radius: 12px;
+    width: 100%;
+    height: 250px; /* You can adjust this size as needed */
+    transition: filter 0.3s ease;
+    background-color: white;
+}
+
+.feed-item:hover {
+    filter: brightness(1.1) saturate(1.3);
+}
+
+#grid-feed .col {
+    padding: 0.5rem;
+}

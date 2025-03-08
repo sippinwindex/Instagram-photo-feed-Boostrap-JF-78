@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instagram Clone</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <style>
+        .modal-backdrop {
+            backdrop-filter: blur(5px);
+            opacity: 0.8 !important;
+        }
+        .modal-content {
+            border-radius: 15px;
+        }
+        .feed-item {
+            aspect-ratio: 1/1;
+            object-fit: cover;
+            border-radius: 12px;
+            width: 100%;
+            height: 250px; /* Square size */
+            transition: filter 0.3s ease;
+            background-color: white;
+        }
+        .feed-item:hover {
+            filter: brightness(1.1) saturate(1.3); /* Increase brightness and saturation */
+        }
+        .nav-pills .nav-link {
+            padding: 12px 18px;
+            border-radius: 10px;
+            background: #f0f0f0;
+            margin: 0 4px;
+            transition: all 0.3s;
+        }
+        .nav-pills .nav-link.active {
+            background-color: #007bff;
+            color: white;
+        }
+        .bi {
+            font-size: 1.5em;
+        }
+        .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.08);
+            margin: 1rem 0;
+            width: 80%; /* Make cards narrower */
+            max-width: 500px;
+        }
+        .card-header {
+            background: transparent;
+            border-bottom: none;
+            padding: 1rem;
+        }
+        .card-body {
+            padding: 1rem;
+        }
+        .card-footer {
+            background: transparent;
+            border-top: none;
+            padding: 1rem;
+        }
+        #grid-feed {
+            padding: 0 1rem;
+        }
+        #grid-feed .col {
+            padding: 0.5rem;
+        }
+        
+        /* Add ample padding to the container */
+        .container {
+            padding: 0 2rem;
+            max-width: 800px; /* Limit container width */
+        }
+        
+        /* Center the nav-pills */
+        .nav.nav-pills {
+            justify-content: center;
+        }
+        
+        /* Center cards in vertical view */
+        .list-group {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom">
+        <div class="container-fluid">
+            <a class="navbar-brand d-flex align-items-center" href="#">
+                <i class="bi bi-instagram text-info me-2" style="font-size: 2.25em;"></i>
+                <span class="h4 mb-0 text-info fw-bold">Instagram</span>
+            </a>
+            <div class="d-flex align-items-center">
+                <button type="button" class="btn btn-success btn-lg me-2" data-bs-toggle="modal" data-bs-target="#newPostModal">
+                    Create a new post
+                </button>
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                        <i class="bi bi-gear"></i>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><a class="dropdown-item" href="#">Profile</a></li>
+                        <li><a class="dropdown-item" href="#">Accessibility</a></li>
+                        <li><a class="dropdown-item" href="#">Privacy and Data</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item text-danger" href="#">Log Out</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- New Post Modal -->
+    <div class="modal fade" id="newPostModal">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header border-0">
+                    <h5 class="modal-title fw-bold">Create New Post</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <textarea class="form-control mb-3" rows="4" placeholder="Add caption..."></textarea>
+                    <div class="d-flex justify-content-between">
+                        <button class="btn btn-outline-secondary">
+                            <i class="bi bi-camera me-2"></i>Photo
+                        </button>
+                        <button class="btn btn-outline-secondary">
+                            <i class="bi bi-geo-alt me-2"></i>Location
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container mt-4">
+        <ul class="nav nav-pills mb-3">
+            <li class="nav-item">
+                <button class="nav-link active" data-bs-toggle="pill" data-bs-target="#grid-feed">
+                    <i class="bi bi-grid"></i>
+                </button>
+            </li>
+            <li class="nav-item">
+                <button class="nav-link" data-bs-toggle="pill" data-bs-target="#vertical-feed">
+                    <i class="bi bi-list"></i>
+                </button>
+            </li>
+        </ul>
+
+        <div class="tab-content">
+            <!-- Grid View -->
+            <div class="tab-pane fade show active" id="grid-feed">
+                <div class="row row-cols-3 g-4">
+                    <div class="col p-2">
+                        <img src="https://picsum.photos/600/600?random=1" class="feed-item">
+                    </div>
+                    <div class="col p-2">
+                        <img src="https://picsum.photos/600/600?random=2" class="feed-item">
+                    </div>
+                    <div class="col p-2">
+                        <img src="https://picsum.photos/600/600?random=3" class="feed-item">
+                    </div>
+                    <div class="col p-2">
+                        <img src="https://picsum.photos/600/600?random=4" class="feed-item">
+                    </div>
+                    <div class="col p-2">
+                        <img src="https://picsum.photos/600/600?random=5" class="feed-item">
+                    </div>
+                    <div class="col p-2">
+                        <img src="https://picsum.photos/600/600?random=6" class="feed-item">
+                    </div>
+                    <div class="col p-2">
+                        <img src="https://picsum.photos/600/600?random=7" class="feed-item">
+                    </div>
+                    <div class="col p-2">
+                        <img src="https://picsum.photos/600/600?random=8" class="feed-item">
+                    </div>
+                    <div class="col p-2">
+                        <img src="https://picsum.photos/600/600?random=9" class="feed-item">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Vertical View -->
+            <div class="tab-pane fade" id="vertical-feed">
+                <div class="list-group list-group-flush">
+                    <!-- Card 1 -->
+                    <div class="card mb-3">
+                        <div class="card-header d-flex justify-content-between">
+                            <div class="fw-bold">Mountain Sunset</div>
+                            <div class="text-muted small">2023-09-15</div>
+                        </div>
+                        <div class="card-body text-center p-2">
+                            <img src="https://picsum.photos/800/800?random=1" class="feed-item mb-3">
+                            <p class="card-text text-muted small">Golden hour view from the alps</p>
+                        </div>
+                        <div class="card-footer d-flex justify-content-between align-items-center p-2">
+                            <div>
+                                <span class="fw-bold">150</span>
+                                <i class="bi bi-heart-fill text-danger ms-1"></i>
+                            </div>
+                            <button class="btn btn-sm btn-outline-secondary">
+                                <i class="bi bi-heart me-2"></i> Like
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Card 2 -->
+                    <div class="card mb-3">
+                        <div class="card-header d-flex justify-content-between">
+                            <div class="fw-bold">City Lights</div>
+                            <div class="text-muted small">2023-09-14</div>
+                        </div>
+                        <div class="card-body text-center p-2">
+                            <img src="https://picsum.photos/800/800?random=2" class="feed-item mb-3">
+                            <p class="card-text text-muted small">Night view of downtown</p>
+                        </div>
+                        <div class="card-footer d-flex justify-content-between align-items-center p-2">
+                            <div>
+                                <span class="fw-bold">230</span>
+                                <i class="bi bi-heart-fill text-danger ms-1"></i>
+                            </div>
+                            <button class="btn btn-sm btn-outline-secondary">
+                                <i class="bi bi-heart me-2"></i> Like
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Card 3 -->
+                    <div class="card mb-3">
+                        <div class="card-header d-flex justify-content-between">
+                            <div class="fw-bold">Beach Morning</div>
+                            <div class="text-muted small">2023-09-13</div>
+                        </div>
+                        <div class="card-body text-center p-2">
+                            <img src="https://picsum.photos/800/800?random=3" class="feed-item mb-3">
+                            <p class="card-text text-muted small">Early morning at the beach</p>
+                        </div>
+                        <div class="card-footer d-flex justify-content-between align-items-center p-2">
+                            <div>
+                                <span class="fw-bold">180</span>
+                                <i class="bi bi-heart-fill text-danger ms-1"></i>
+                            </div>
+                            <button class="btn btn-sm btn-outline-secondary">
+                                <i class="bi bi-heart me-2"></i> Like
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Card 4 -->
+                    <div class="card mb-3">
+                        <div class="card-header d-flex justify-content-between">
+                            <div class="fw-bold">Forest Walk</div>
+                            <div class="text-muted small">2023-09-12</div>
+                        </div>
+                        <div class="card-body text-center p-2">
+                            <img src="https://picsum.photos/800/800?random=4" class="feed-item mb-3">
+                            <p class="card-text text-muted small">Tranquil forest path</p>
+                        </div>
+                        <div class="card-footer d-flex justify-content-between align-items-center p-2">
+                            <div>
+                                <span class="fw-bold">120</span>
+                                <i class="bi bi-heart-fill text-danger ms-1"></i>
+                            </div>
+                            <button class="btn btn-sm btn-outline-secondary">
+                                <i class="bi bi-heart me-2"></i> Like
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Card 5 -->
+                    <div class="card mb-3">
+                        <div class="card-header d-flex justify-content-between">
+                            <div class="fw-bold">Desert Dunes</div>
+                            <div class="text-muted small">2023-09-11</div>
+                        </div>
+                        <div class="card-body text-center p-2">
+                            <img src="https://picsum.photos/800/800?random=5" class="feed-item mb-3">
+                            <p class="card-text text-muted small">Sandy desert landscape</p>
+                        </div>
+                        <div class="card-footer d-flex justify-content-between align-items-center p-2">
+                            <div>
+                                <span class="fw-bold">95</span>
+                                <i class="bi bi-heart-fill text-danger ms-1"></i>
+                            </div>
+                            <button class="btn btn-sm btn-outline-secondary">
+                                <i class="bi bi-heart me-2"></i> Like
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Card 6 -->
+                    <div class="card mb-3">
+                        <div class="card-header d-flex justify-content-between">
+                            <div class="fw-bold">Lake Reflection</div>
+                            <div class="text-muted small">2023-09-10</div>
+                        </div>
+                        <div class="card-body text-center p-2">
+                            <img src="https://picsum.photos/800/800?random=6" class="feed-item mb-3">
+                            <p class="card-text text-muted small">Mirror-like lake surface</p>
+                        </div>
+                        <div class="card-footer d-flex justify-content-between align-items-center p-2">
+                            <div>
+                                <span class="fw-bold">160</span>
+                                <i class="bi bi-heart-fill text-danger ms-1"></i>
+                            </div>
+                            <button class="btn btn-sm btn-outline-secondary">
+                                <i class="bi bi-heart me-2"></i> Like
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Card 7 -->
+                    <div class="card mb-3">
+                        <div class="card-header d-flex justify-content-between">
+                            <div class="fw-bold">Mountain Peak</div>
+                            <div class="text-muted small">2023-09-09</div>
+                        </div>
+                        <div class="card-body text-center p-2">
+                            <img src="https://picsum.photos/800/800?random=7" class="feed-item mb-3">
+                            <p class="card-text text-muted small">Snow-capped mountain view</p>
+                        </div>
+                        <div class="card-footer d-flex justify-content-between align-items-center p-2">
+                            <div>
+                                <span class="fw-bold">210</span>
+                                <i class="bi bi-heart-fill text-danger ms-1"></i>
+                            </div>
+                            <button class="btn btn-sm btn-outline-secondary">
+                                <i class="bi bi-heart me-2"></i> Like
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Card 8 -->
+                    <div class="card mb-3">
+                        <div class="card-header d-flex justify-content-between">
+                            <div class="fw-bold">Urban Garden</div>
+                            <div class="text-muted small">2023-09-08</div>
+                        </div>
+                        <div class="card-body text-center p-2">
+                            <img src="https://picsum.photos/800/800?random=8" class="feed-item mb-3">
+                            <p class="card-text text-muted small">Green space in the city</p>
+                        </div>
+                        <div class="card-footer d-flex justify-content-between align-items-center p-2">
+                            <div>
+                                <span class="fw-bold">140</span>
+                                <i class="bi bi-heart-fill text-danger ms-1"></i>
+                            </div>
+                            <button class="btn btn-sm btn-outline-secondary">
+                                <i class="bi bi-heart me-2"></i> Like
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Card 9 -->
+                    <div class="card mb-3">
+                        <div class="card-header d-flex justify-content-between">
+                            <div class="fw-bold">Autumn Leaves</div>
+                            <div class="text-muted small">2023-09-07</div>
+                        </div>
+                        <div class="card-body text-center p-2">
+                            <img src="https://picsum.photos/800/800?random=9" class="feed-item mb-3">
+                            <p class="card-text text-muted small">Vibrant fall foliage</p>
+                        </div>
+                        <div class="card-footer d-flex justify-content-between align-items-center p-2">
+                            <div>
+                                <span class="fw-bold">195</span>
+                                <i class="bi bi-heart-fill text-danger ms-1"></i>
+                            </div>
+                            <button class="btn btn-sm btn-outline-secondary">
+                                <i class="bi bi-heart me-2"></i> Like
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+</body>
+</html>
